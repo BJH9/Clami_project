@@ -1,4 +1,4 @@
-package program.test;
+package edu.handong.csee.isel.clami;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
