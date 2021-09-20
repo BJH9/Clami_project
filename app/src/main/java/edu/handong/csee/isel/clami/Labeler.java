@@ -36,8 +36,8 @@ public class Labeler {
 	private int[][] group;
 	private int vMedian;//버그 분류할 때 중간값
 	
-	public void setInstances() {//cluster에서 받아온 arff를 instances에 할당
-		instances = Cluster.loadArff(Cluster.getArffPath());
+	public void setInstances(String path) {//cluster에서 받아온 arff를 instances에 할당
+		instances = Cluster.loadArff(path);
 	}
 	
 	public void setRow() {// instance의 column을 row에 할당 	
@@ -48,7 +48,10 @@ public class Labeler {
 		column = instances.size();
 	}
 	
-	public void transposeMarix(){//instances의 행과 열을 바꿔 배열에 저장
+	public void transposeMarix(String path){//instances의 행과 열을 바꿔 배열에 저장
+		setInstances(path);
+		setRow();
+		setColumn();
 		transposedMatrix = new int[row][column];
 		for(int i = 0; i < row - 1; i++) {
 			for(int j = 0; j < column - 1; j++) {

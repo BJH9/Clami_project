@@ -1,7 +1,7 @@
 package edu.handong.csee.isel.clami;
 
 public class Main {
-	String path;
+	private static String path;
 	
 	public static void main(String[] args) {
 		Main main = new Main();
@@ -14,6 +14,7 @@ public class Main {
 	
 	path = "//Users//a21700328//Apache//Apache.arff";
 	cluster.loadArff(path);
-	}
+	labeler.transposeMatrix(path);
+	
 
 }

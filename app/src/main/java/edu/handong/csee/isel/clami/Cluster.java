@@ -16,7 +16,7 @@ public class Cluster {
 		
 	}
 	
-	public Instances loadArff(String path){//instance 데이터 수집 
+	public static Instances loadArff(String path){//instance 데이터 수집 
 		
 		arffPath = path;
 		
@@ -34,6 +34,7 @@ public class Cluster {
 			e.printStackTrace();
 		}
 		instances.setClassIndex(instances.numAttributes()-1);
+		System.out.println(instances);
 		return instances;
 	}
 	
