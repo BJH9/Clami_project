@@ -13,8 +13,17 @@ public class Main {
 	Labeler labeler = new Labeler();
 	
 	path = "//Users//a21700328//Apache//Apache.arff";
+	
 	cluster.loadArff(path);
+	cluster.printInstances();
+	
+	labeler.setInstances(path);
+	labeler.setRow();
+	labeler.setColumn();
+	
 	labeler.transposeMatrix(path);
 	
+	labeler.findHigherValues();
 
+	}
 }

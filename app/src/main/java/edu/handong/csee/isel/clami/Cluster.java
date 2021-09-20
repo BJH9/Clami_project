@@ -10,6 +10,7 @@ import weka.core.Instances;
 public class Cluster {
 	
 	private static String arffPath;
+	private static Instances instancesFile;
 	
 	public Cluster() {
 		arffPath = null;
@@ -34,8 +35,12 @@ public class Cluster {
 			e.printStackTrace();
 		}
 		instances.setClassIndex(instances.numAttributes()-1);
-		System.out.println(instances);
+		instancesFile = instances;
 		return instances;
+	}
+	
+	public void printInstances() {
+		System.out.println(instancesFile);
 	}
 	
 	public static String getArffPath() {

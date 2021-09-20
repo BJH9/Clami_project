@@ -7,17 +7,12 @@ import java.util.Arrays;
 import weka.core.Instance;
 
 public class Labeler {
-	
-	public Labeler() {
-	}
-
-
-	private Instances instances;//arff instances
-	private Instance instance;//arff instance
-	private int row;
-	private int column;
+	private static Instances instances;//arff instances
+	private static Instance instance;//arff instance
+	private static int row;
+	private static int column;
 	private int[][] transposedMatrix;
-	private int[] individualInstance;//instance를 저장할 배열 
+	private static int[] individualInstance;//instance를 저장할 배열 
 	private int[] originalIndividualIns;
 	private int median;
 	private int[] medians;
@@ -34,11 +29,20 @@ public class Labeler {
 	private int[][] group;
 	private int vMedian;//버그 분류할 때 중간값
 	
+	public Labeler() {
+		instance = null;
+		instances = null;
+		row = 0;
+		column = 0;
+	}
+	
 	public void setInstances(String path) {//cluster에서 받아온 arff를 instances에 할당
 		instances = Cluster.loadArff(path);
 	}
 	
-	public void setRow() {// instance의 column을 row에 할당 	
+	
+	public void setRow() {// instance의 column을 row에 할당 
+		instance = instances.get(0);
 		row = instance.numAttributes();
 	}
 	
@@ -47,32 +51,38 @@ public class Labeler {
 	}
 	
 	public void transposeMatrix(String path){//instances의 행과 열을 바꿔 배열에 저장
-		setInstances(path);
-		setRow();
-		setColumn();
+		
 		transposedMatrix = new int[row][column];
+		System.out.println("");
+		System.out.println("transposed matrix");
 		for(int i = 0; i < row - 1; i++) {
+			System.out.println("");
 			for(int j = 0; j < column - 1; j++) {
 				instance = instances.get(j);
 				transposedMatrix[i][j] = (int)instance.valueSparse(i);
 				
-				System.out.println(transposedMatrix[i][j] + ",");
+				System.out.print(transposedMatrix[i][j] + ",");
 			}
 		}
 		
 	}
 	
-	public void findViolations() {
+	public void findHigherValues() {
 		median = 0;
 		medians = new int[row];
 		kFormedians = 0;
 		kForInformation = 0;
+		individualInstance = new int[row];
+		originalIndividualIns = new int[row];
+		
+		System.out.println("");
 		
 		for(int i = 0; i < row - 1; i++) {
+			System.out.println("");
 			System.out.println(i + "번 째 metric ");
 			for(int j = 0; j < column - 1; j++) {
 				individualInstance[j] = transposedMatrix[i][j];//행의 instance를 저장 
-				System.out.println(individualInstance[i] + ",");
+				System.out.print(individualInstance[j] + ",");
 			}
 			
 			for(int j = 0; j < column - 1; j++)
