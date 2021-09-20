@@ -138,7 +138,18 @@ public class Labeler {
 	
 	public void labelBugs() {
 		
+		locationIndex = 0;
 		oViolationNumber = new int[column];
+		bugLabel = new String[column];
+		group = new int[column][column];
+		
+		for(int i =0; i < column; i++) {
+			for(int j = 0; j < column; j++)
+				group[i][j] = 0;
+		}
+		for(int i = 0; i < row; i++) {
+			bugLabel[i] = null;
+		}
 		
 		System.out.println("");
 		System.out.println("각각의  metric의  violation 개수 ");
@@ -164,11 +175,13 @@ public class Labeler {
 		for(int i = 0; i < column - 1; i++) {
 			oViolationNumber[i] = violationNumber[i];
 		}
+		System.out.println(" ");
 		
 		for(int i = 0; i < column - 1; i++) {
 			bugLabel[i] = String.valueOf(violationNumber[i]);
 		}
 		System.out.println("");
+		System.out.println("s");
 		
 		
 		Arrays.sort(violationNumber);
@@ -188,7 +201,7 @@ public class Labeler {
 			
 			if(violationNumber[i] != violationNumber[i+1]) {
 				
-				System.out.println("");
+				
 				for(int j = locationIndex; j <= i; j++) {
 					group[kForGroup][j] = violationNumber[i];
 					System.out.print(group[kForGroup][j] + ",");
