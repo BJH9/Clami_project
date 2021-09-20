@@ -9,8 +9,6 @@ import weka.core.Instance;
 public class Labeler {
 	
 	public Labeler() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -48,7 +46,7 @@ public class Labeler {
 		column = instances.size();
 	}
 	
-	public void transposeMarix(String path){//instances의 행과 열을 바꿔 배열에 저장
+	public void transposeMatrix(String path){//instances의 행과 열을 바꿔 배열에 저장
 		setInstances(path);
 		setRow();
 		setColumn();
