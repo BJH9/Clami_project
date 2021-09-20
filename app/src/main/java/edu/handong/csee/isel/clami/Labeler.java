@@ -8,6 +8,12 @@ import weka.core.Instance;
 
 public class Labeler {
 	
+	public Labeler() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	private Instances instances;//arff instances
 	private Instance instance;//arff instance
 	private int row;

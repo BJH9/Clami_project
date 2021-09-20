@@ -8,9 +8,15 @@ import java.io.IOException;
 import weka.core.Instances;
 
 public class Cluster {
+	
 	private static String arffPath;
 	
-	public static Instances loadArff(String path){//instance 데이터 수집 
+	public Cluster() {
+		arffPath = null;
+		
+	}
+	
+	public Instances loadArff(String path){//instance 데이터 수집 
 		
 		arffPath = path;
 		
