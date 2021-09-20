@@ -24,6 +24,8 @@ public class Main {
 	labeler.transposeMatrix(path);
 	
 	labeler.findHigherValues();
+	
+	labeler.labelBugs();
 
 	}
 }

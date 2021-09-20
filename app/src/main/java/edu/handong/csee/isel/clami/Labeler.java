@@ -71,13 +71,25 @@ public class Labeler {
 		median = 0;
 		medians = new int[row];
 		kFormedians = 0;
+		kForLocation = 0;
 		kForInformation = 0;
-		individualInstance = new int[row];
-		originalIndividualIns = new int[row];
+		individualInstance = new int[column];
+		originalIndividualIns = new int[column];
+		location = new int[column][row];
+		violationNumber = new int[column];
+		locationInformation = new int[column];
+		
+		for(int i = 0; i < column; i++) {
+			individualInstance[i] = 0;
+			originalIndividualIns[i] = 0;
+			violationNumber[i] = 0;
+			locationInformation[i] = 0;
+		}
 		
 		System.out.println("");
 		
 		for(int i = 0; i < row - 1; i++) {
+			kForLocation = 0;
 			System.out.println("");
 			System.out.println(i + "번 째 metric ");
 			for(int j = 0; j < column - 1; j++) {
@@ -90,29 +102,28 @@ public class Labeler {
 			
 			Arrays.sort(individualInstance);
 			
+			System.out.println("");
+			System.out.println("");
 			System.out.println("정렬된 metrices");
 			for(int j = 0; j < column - 1; j++) {
-				System.out.println(individualInstance[j] + ",");
+				System.out.print(individualInstance[j] + ",");
 			}
 			
-			median = individualInstance[row / 2];
+			median = individualInstance[column / 2];
 			medians[kFormedians] = median;
 			kFormedians++;
 			
+			System.out.println("");
 			System.out.println("median 값: " + median);
 			
 			for(int j = 0; j < column - 1; j++) {
 				if(originalIndividualIns[j] > median) {
-					location[i][kForLocation]++;
 					violationNumber[j]++;
 					kForLocation++;
 				}
 			}
 			
-			System.out.println(i + "번 째 metric violation 위치 ");
-			for(int j = 0; j < kForLocation; j++) {
-				System.out.println(location[i][j] + ",");
-			}
+			
 			System.out.println("");
 			System.out.println(i + " 번 째 metric violation 개수 : " + kForLocation);
 			System.out.println("");
@@ -126,10 +137,13 @@ public class Labeler {
 	
 	
 	public void labelBugs() {
+		
+		oViolationNumber = new int[column];
+		
 		System.out.println("");
 		System.out.println("각각의  metric의  violation 개수 ");
 		
-		for(int i = 0; i < kForLocation; i++) {
+		for(int i = 0; i < row - 1; i++) {
 			System.out.print(locationInformation[i] + ",");
 			violationNumber[locationInformation[i]]++;
 		}
@@ -142,13 +156,20 @@ public class Labeler {
 			System.out.print(violationNumber[i] + ",");
 		}
 		
+		for(int i = 0; i < column; i++) {
+			oViolationNumber[i] = 0;
+		}
+		
+		
 		for(int i = 0; i < column - 1; i++) {
 			oViolationNumber[i] = violationNumber[i];
 		}
+		
 		for(int i = 0; i < column - 1; i++) {
 			bugLabel[i] = String.valueOf(violationNumber[i]);
 		}
 		System.out.println("");
+		
 		
 		Arrays.sort(violationNumber);
 		System.out.println("");
