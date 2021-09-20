@@ -165,6 +165,7 @@ public class Labeler {
 			oViolationNumber[i] = violationNumber[i];
 		}
 		
+		
 		for(int i = 0; i < column - 1; i++) {
 			bugLabel[i] = String.valueOf(violationNumber[i]);
 		}
